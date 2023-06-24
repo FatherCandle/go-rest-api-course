@@ -23,6 +23,12 @@ func Run() error {
 	}
 
 	cmtService := comment.NewService(db)
+	cmtService.PostComment(context.Background(), comment.Comment{
+		ID:     "6cda1fe9-e7f8-473d-8244-45d8947222fc",
+		Slug:   "manual-test",
+		Body:   "Hello World",
+		Author: "Avner",
+	})
 	fmt.Println(cmtService.GetComment(context.Background(), "6cda1fe9-e7f8-473d-8244-45d8947222fc"))
 
 
