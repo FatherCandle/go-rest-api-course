@@ -1,7 +1,6 @@
 package main
 
 import (
-	"context"
 	"fmt"
 
 	"github.com/FatherCandle/go-rest-api-course/internal/db"
@@ -15,7 +14,9 @@ func Run() error {
 	if err != nil {
 		fmt.Println("Failed to connect ot the database")
 	}
-	if err := db.Ping(context.Background()); err != nil {
+
+	if err := db.MigrateDB(); err != nil {
+		fmt.Println("failed ot migrate database")
 		return err
 	}
 
@@ -24,7 +25,7 @@ func Run() error {
 
 func main() {
 	fmt.Println("GO REST API Course")
-	if err := Run(); err != nil{
+	if err := Run(); err != nil {
 		fmt.Println(err)
 	}
 }
