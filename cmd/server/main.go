@@ -1,11 +1,12 @@
 package main
 
 import (
-	"context"
 	"fmt"
 
 	"github.com/FatherCandle/go-rest-api-course/internal/comment"
+	transportHttp "github.com/FatherCandle/go-rest-api-course/internal/transport/http"
 	"github.com/FatherCandle/go-rest-api-course/internal/db"
+
 )
 
 // Run is going ot be responsible for the instantitation and startup of our go application
@@ -23,13 +24,11 @@ func Run() error {
 	}
 
 	cmtService := comment.NewService(db)
-	cmtService.PostComment(context.Background(), comment.Comment{
-		ID:     "6cda1fe9-e7f8-473d-8244-45d8947222fc",
-		Slug:   "manual-test",
-		Body:   "Hello World",
-		Author: "Avner",
-	})
-	fmt.Println(cmtService.GetComment(context.Background(), "6cda1fe9-e7f8-473d-8244-45d8947222fc"))
+
+	httpsHandler := transportHttp.NewHandler(cmtService)
+	if err := httpsHandler.Serve(); err != nil {
+		return err
+	}
 
 
 	return nil

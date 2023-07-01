@@ -27,7 +27,7 @@ type Store interface {
 	DeleteComment(context.Context, string) error
 }
 
-// Srivice - is the struct on which all of our logic will be built on top of
+// Service - is the struct on which all of our logic will be built on top of
 type Service struct {
 	Store Store
 }
