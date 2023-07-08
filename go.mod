@@ -3,6 +3,7 @@ module github.com/FatherCandle/go-rest-api-course
 go 1.18
 
 require (
+	github.com/go-resty/resty/v2 v2.7.0
 	github.com/golang-migrate/migrate/v4 v4.16.2
 	github.com/jmoiron/sqlx v1.3.5
 	github.com/lib/pq v1.10.2
