@@ -26,6 +26,7 @@ func NewHandler(service CommentService) *Handler {
 	h.Router = mux.NewRouter()
 	h.mapRoutes()
 	h.Router.Use(JSONMiddleware)
+	h.Router.Use(LoggingMiddleware)
 
 	h.Server = &http.Server{Addr: "0.0.0.0:8080", Handler: h.Router}
 	return h
@@ -56,7 +57,7 @@ func (h *Handler) Serve() error {
 	ctx, cancel := context.WithTimeout(context.Background(), 15*time.Second)
 	defer cancel()
 	h.Server.Shutdown(ctx)
-	
+
 	log.Println("Shotdown gracefully")
 	return nil
 }
